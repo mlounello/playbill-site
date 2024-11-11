@@ -1,0 +1,29 @@
+/* src/components/ShowCard.css */
+
+.show-card {
+  width: 300px;
+  margin: 20px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.show-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.show-poster {
+  width: 100%;
+  height: auto;
+}
+
+.show-title {
+  text-align: center;
+  padding: 10px 0;
+  color: #006b54; /* Siena's primary color */
+  font-family: 'Oswald', sans-serif; /* Ensure font is imported */
+}

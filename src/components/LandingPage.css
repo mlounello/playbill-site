@@ -1,0 +1,30 @@
+/* src/components/LandingPage.css */
+
+.landing-page {
+    padding: 20px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+  }
+  
+  .landing-header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #006b54; /* Siena's primary color */
+    font-family: 'Oswald', sans-serif; /* Ensure font is imported */
+  }
+  
+  .landing-header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+  }
+  
+  .landing-header p {
+    font-size: 1.2em;
+    color: #333333;
+  }
+  
+  .shows-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
