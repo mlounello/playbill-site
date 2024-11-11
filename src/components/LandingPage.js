@@ -9,8 +9,14 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <header className="landing-header">
-        <h1>Siena College Theatre Department</h1>
-        <p>Please Select a Playbill Below</p>
+        {/* Centered Logo */}
+        <img
+          src="/images/DOMEMARK_RGB_YellowDomeGreenText.png"
+          alt="Siena College Logo"
+          className="siena-logo"
+        />
+        <h1>Siena College Performing Arts</h1>
+        <p>Please select a Playbill below:</p>
       </header>
       <div className="shows-grid">
         {shows.map((show) => (

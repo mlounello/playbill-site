@@ -1,9 +1,21 @@
 /* src/components/LandingPage.css */
 
-.landing-page {
+/* Define CSS Variables for Branding */
+:root {
+    --siena-green: #006b54;
+    --siena-gold: #fcc917;
+    --siena-dark-green: #004d3a; /* Darker shade for accents */
+    --siena-light: #ffffff; /* White for backgrounds */
+    --text-color: #333333; /* Default text color */
+  }
+  
+  .landing-page {
     padding: 20px;
     background-color: var(--siena-light);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .landing-header {
@@ -11,20 +23,55 @@
     margin-bottom: 40px;
     color: var(--siena-green);
     font-family: 'Oswald', sans-serif;
+    position: relative;
   }
   
+  /* Center the Logo */
+  .siena-logo {
+    width: 150px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 20px;
+    display: block; /* Ensures the image behaves as a block element */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Header Title Styling */
   .landing-header h1 {
     font-size: 3em;
     margin-bottom: 10px;
+    color: var(--siena-dark-green);
+    border-bottom: 4px solid var(--siena-gold); /* Gold underline */
+    display: inline-block;
+    padding-bottom: 10px;
   }
   
+  /* Subheader Styling - No Underline */
   .landing-header p {
     font-size: 1.2em;
     color: var(--text-color);
+    margin-top: 10px;
+    /* Removed any underline-related styles */
   }
   
+  /* Remove the Accent Bar Below Header if Present */
+  .landing-header::after {
+    /* Commented out to remove the gold accent bar */
+    /* content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--siena-gold);
+    margin: 20px auto 0;
+    border-radius: 2px; */
+  }
+  
+  /* Shows Grid Styling */
   .shows-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 20px; /* Space between show cards */
+    width: 100%;
+    max-width: 1200px; /* Limit the width for better readability */
   }
