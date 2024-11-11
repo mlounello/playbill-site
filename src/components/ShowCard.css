@@ -1,12 +1,15 @@
 /* src/components/ShowCard.css */
 
-/* Define CSS Variables for Branding (if not already defined) */
-:root {
-  --siena-green: #006b54;
-  --siena-gold: #fcc917;
-  --siena-dark-green: #004d3a;
+.show-card-link {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit text color */
 }
 
+.show-card-link:hover {
+  text-decoration: none; /* Ensure no underline on hover */
+}
+
+/* Existing styles remain unchanged */
 .show-card {
   width: 300px;
   margin: 20px;
@@ -17,19 +20,19 @@
   background-color: var(--siena-light);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: 'Gudea', sans-serif;
-  border: 2px solid transparent; /* Initial border */
+  border: 2px solid transparent;
 }
 
 .show-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
-  border: 2px solid var(--siena-gold); /* Gold border on hover */
+  border: 2px solid var(--siena-gold);
 }
 
 .show-poster {
   width: 100%;
   height: auto;
-  border-bottom: 2px solid var(--siena-gold); /* Gold border below the image */
+  border-bottom: 2px solid var(--siena-gold);
 }
 
 .show-title {
@@ -42,7 +45,8 @@
   font-size: 1.5em;
 }
 
-/* Optional: Add "Learn More" Button */
+/* Optional: Learn More Button Styles */
+/* 
 .learn-more-button {
   background-color: var(--siena-gold);
   color: var(--siena-dark-green);
@@ -60,3 +64,4 @@
   background-color: var(--siena-dark-green);
   color: var(--siena-light);
 }
+*/

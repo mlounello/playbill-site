@@ -1,19 +1,23 @@
 // src/components/ShowCard.js
 
 import React from 'react';
-import './ShowCard.css'; // Ensure this CSS file exists
+import { Link } from 'react-router-dom';
+import './ShowCard.css';
 
 const ShowCard = ({ show }) => {
-  const handleClick = () => {
-    // For now, we'll use an alert. We'll implement routing in a later step.
-    alert(`Clicked on ${show.title}`);
-  };
-
   return (
-    <div className="show-card" onClick={handleClick}>
-      <img src={show.poster} alt={`${show.title} Poster`} className="show-poster" />
-      <h3 className="show-title">{show.title}</h3>
-    </div>
+    <Link to={`/shows/${show.id}`} className="show-card-link">
+      <div className="show-card">
+        <img
+          src={show.poster}
+          alt={`${show.title} Poster`}
+          className="show-poster"
+        />
+        <h3 className="show-title">{show.title}</h3>
+        {/* Optional: Add a "Learn More" Button */}
+        {/* <button className="learn-more-button">Learn More</button> */}
+      </div>
+    </Link>
   );
 };
 

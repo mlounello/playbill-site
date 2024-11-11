@@ -1,0 +1,79 @@
+/* src/components/ShowDetail.css */
+
+:root {
+    --siena-green: #006b54;
+    --siena-gold: #fcc917;
+    --siena-dark-green: #004d3a;
+    --siena-light: #ffffff;
+    --text-color: #333333;
+  }
+  
+  .show-detail {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--siena-light);
+    color: var(--text-color);
+    font-family: 'Gudea', sans-serif;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: var(--siena-green);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1em;
+    transition: color 0.3s;
+  }
+  
+  .back-link:hover {
+    color: var(--siena-gold);
+  }
+  
+  .show-detail-title {
+    font-size: 2.5em;
+    color: var(--siena-dark-green);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .show-detail-poster {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 0 auto 20px auto;
+  }
+  
+  .show-detail-description {
+    font-size: 1.2em;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 30px;
+  }
+  
+  /* Section Styling */
+  .show-section {
+    margin-bottom: 30px;
+  }
+  
+  .show-section h3 {
+    font-size: 1.8em;
+    color: var(--siena-green);
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--siena-gold);
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+  
+  .show-section ul,
+  .show-section ol {
+    padding-left: 20px;
+    font-size: 1.1em;
+  }
+  
+  .show-section ul li,
+  .show-section ol li {
+    margin-bottom: 8px;
+  }
