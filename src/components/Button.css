@@ -1,0 +1,30 @@
+/* src/components/Button.css */
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1em;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .button.primary {
+    background-color: var(--siena-green);
+    color: var(--siena-light);
+  }
+  
+  .button.primary:hover {
+    background-color: var(--siena-dark-green);
+  }
+  
+  .button.secondary {
+    background-color: var(--siena-gold);
+    color: var(--siena-dark-green);
+  }
+  
+  .button.secondary:hover {
+    background-color: var(--siena-dark-green);
+    color: var(--siena-light);
+  }

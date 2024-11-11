@@ -1,14 +1,19 @@
 // src/components/ShowDetail.js
 
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { useParams, Link } from 'react-router-dom';
 import shows from '../data/shows';
-import './ShowDetail.css'; // We'll create this CSS file for styling
+import './ShowDetail.css';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
 
 const ShowDetail = () => {
   const { id } = useParams(); // Extract the show ID from the URL
   const show = shows.find((s) => s.id === parseInt(id));
+
+  // State for Lightbox
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [currentImage, setCurrentImage] = React.useState(0);
 
   if (!show) {
     return (
@@ -34,50 +39,86 @@ const ShowDetail = () => {
       />
       <p className="show-detail-description">{show.description}</p>
 
+      {/* Director's Note */}
+      <section className="show-section">
+        <h3>Director's Note</h3>
+        <p>{show.directorNote}</p>
+      </section>
+
       {/* Cast Section */}
       <section className="show-section">
         <h3>Cast</h3>
-        <ul>
+        <div className="profiles-grid">
           {show.cast.map((member, index) => (
-            <li key={index}>
-              <strong>{member.role}:</strong> {member.actor}
-            </li>
+            <div key={index} className="profile-card">
+              <img
+                src={member.photo}
+                alt={`${member.actor} as ${member.role}`}
+                className="profile-photo"
+              />
+              <h4>{member.actor}</h4>
+              <p className="role">{member.role}</p>
+              <p className="bio">{member.bio}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
 
       {/* Crew Section */}
       <section className="show-section">
         <h3>Crew</h3>
-        <ul>
+        <div className="profiles-grid">
           {show.crew.map((member, index) => (
-            <li key={index}>
-              <strong>{member.role}:</strong> {member.name}
-            </li>
+            <div key={index} className="profile-card">
+              <img
+                src={member.photo}
+                alt={`${member.name} - ${member.role}`}
+                className="profile-photo"
+              />
+              <h4>{member.name}</h4>
+              <p className="role">{member.role}</p>
+              <p className="bio">{member.bio}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
 
-      {/* Songs Section */}
+      {/* Post-Show Media Gallery */}
       <section className="show-section">
-        <h3>Songs</h3>
-        <ol>
-          {show.songs.map((song, index) => (
-            <li key={index}>{song}</li>
+        <h3>Media Gallery</h3>
+        <div className="media-gallery">
+          {show.mediaGallery.map((media, index) => (
+            <img
+              key={index}
+              src={media}
+              alt={`${show.title} Media ${index + 1}`}
+              className="media-photo"
+              onClick={() => {
+                setCurrentImage(index);
+                setIsOpen(true);
+              }}
+            />
           ))}
-        </ol>
+        </div>
+        {isOpen && (
+          <Lightbox
+            open={isOpen}
+            close={() => setIsOpen(false)}
+            slides={show.mediaGallery.map((image) => ({ src: image }))}
+            index={currentImage}
+            onClose={() => setIsOpen(false)}
+            onMovePrev={() =>
+              setCurrentImage(
+                (currentImage + show.mediaGallery.length - 1) %
+                  show.mediaGallery.length
+              )
+            }
+            onMoveNext={() =>
+              setCurrentImage((currentImage + 1) % show.mediaGallery.length)
+            }
+          />
+        )}
       </section>
-
-      {/* Acknowledgements Section */}
-      <section className="show-section">
-        <h3>Acknowledgements</h3>
-        <ul>
-          {show.acknowledgements.map((ack, index) => (
-            <li key={index}>{ack}</li>
-          ))}
-        </ul>
-      </section>
-         {/* Existing content */}
     </div>
   );
 };
