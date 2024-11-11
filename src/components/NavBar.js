@@ -9,7 +9,7 @@ const NavBar = () => {
     <nav className="navbar">
       <Link to="/" className="navbar-logo">
         <img
-          src="/images/DOMEMARK_RGB_YellowDomeGreenText.png"
+          src="/images/DOMEMARK_PMS_YellowDomeWhiteText.png"
           alt="Siena College Logo"
           className="navbar-logo-img"
         />

@@ -9,12 +9,6 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <header className="landing-header">
-        {/* Centered Logo */}
-        <img
-          src="/images/DOMEMARK_RGB_YellowDomeGreenText.png"
-          alt="Siena College Logo"
-          className="siena-logo"
-        />
         <h1>Siena College Productions</h1>
         <p>Welcome to our Digital Playbill</p>
       </header>

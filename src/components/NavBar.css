@@ -16,6 +16,13 @@
     justify-content: space-between;
     padding: 10px 20px;
   }
+  .admin-panel-header {
+    display: flex;
+    justify-content: space-between; /* Align Home button to the right */
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+  }
   
   .navbar-logo {
     text-decoration: none;
@@ -33,7 +40,7 @@
   }
   
   .navbar-links li a {
-    color: var(--siena-gold);
+    color: var(--siena-light);
     text-decoration: none;
     font-family: 'Oswald', sans-serif;
     font-size: 1.1em;
@@ -41,7 +48,7 @@
   }
   
   .navbar-links li a:hover {
-    color: var(--siena-light);
+    color: var(--siena-gold);
   }
   
   /* Responsive Design */

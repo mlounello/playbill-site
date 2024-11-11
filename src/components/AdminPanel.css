@@ -1,0 +1,76 @@
+/* src/components/AdminPanel.css */
+
+.admin-panel {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+  }
+  
+  .admin-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .admin-panel h2 {
+    font-size: 2em;
+  }
+  
+  .home-button {
+    padding: 10px 24px;
+    font-size: 1em;
+    min-width: 70px;
+  }
+  
+  .show-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .show-form input,
+  .show-form textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+  }
+  
+  .shows-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .shows-list th,
+  .shows-list td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .show-form,
+    .shows-list table {
+      width: 100%;
+      font-size: 0.9em;
+    }
+  
+    .admin-panel h2 {
+      font-size: 1.5em;
+    }
+  
+    .home-button {
+      padding: 8px 16px;
+      font-size: 0.9em;
+    }
+  }
