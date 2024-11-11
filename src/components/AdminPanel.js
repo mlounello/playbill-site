@@ -36,7 +36,7 @@ const AdminPanel = () => {
       console.error("Error fetching shows:", error);
       setError('Failed to load shows.');
     }
-  }, []);
+  }, [showsCollectionRef]); // Add showsCollectionRef as a dependency
 
   useEffect(() => {
     fetchShows();
