@@ -1,0 +1,9 @@
+/* src/components/ErrorBoundary.css */
+
+.error-boundary {
+    padding: 50px;
+    text-align: center;
+    background-color: var(--siena-light);
+    color: var(--siena-dark-green);
+    font-family: 'Gudea', sans-serif;
+  }
