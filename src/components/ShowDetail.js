@@ -1,9 +1,10 @@
 // src/components/ShowDetail.js
 
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { useParams, Link } from 'react-router-dom';
 import shows from '../data/shows';
-import './ShowDetail.css';
+import './ShowDetail.css'; // We'll create this CSS file for styling
 
 const ShowDetail = () => {
   const { id } = useParams(); // Extract the show ID from the URL
@@ -76,6 +77,7 @@ const ShowDetail = () => {
           ))}
         </ul>
       </section>
+         {/* Existing content */}
     </div>
   );
 };

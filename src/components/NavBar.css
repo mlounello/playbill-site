@@ -1,0 +1,62 @@
+/* src/components/NavBar.css */
+
+:root {
+    --siena-green: #006b54;
+    --siena-gold: #fcc917;
+    --siena-dark-green: #004d3a;
+    --siena-light: #ffffff;
+    --text-color: #333333;
+  }
+  
+  .navbar {
+    width: 100%;
+    background-color: var(--siena-green);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+  
+  .navbar-logo {
+    text-decoration: none;
+  }
+  
+  .navbar-logo-img {
+    width: 120px;
+    height: auto;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navbar-links li a {
+    color: var(--siena-gold);
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1em;
+    transition: color 0.3s;
+  }
+  
+  .navbar-links li a:hover {
+    color: var(--siena-light);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .navbar-links {
+      flex-direction: column;
+      background-color: var(--siena-green);
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      width: 150px;
+      display: none;
+    }
+  
+    .navbar-links.active {
+      display: flex;
+    }
+  }

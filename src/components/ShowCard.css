@@ -9,7 +9,6 @@
   text-decoration: none; /* Ensure no underline on hover */
 }
 
-/* Existing styles remain unchanged */
 .show-card {
   width: 300px;
   margin: 20px;
@@ -46,7 +45,7 @@
 }
 
 /* Optional: Learn More Button Styles */
-/* 
+/*
 .learn-more-button {
   background-color: var(--siena-gold);
   color: var(--siena-dark-green);
