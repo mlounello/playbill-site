@@ -77,3 +77,22 @@
   .show-section ol li {
     margin-bottom: 8px;
   }
+  /* src/components/ShowDetail.css */
+
+@media (max-width: 768px) {
+    .show-detail {
+      padding: 10px;
+    }
+  
+    .show-detail-title {
+      font-size: 2em;
+    }
+  
+    .show-detail-description {
+      font-size: 1em;
+    }
+  
+    .show-section h3 {
+      font-size: 1.5em;
+    }
+  }
