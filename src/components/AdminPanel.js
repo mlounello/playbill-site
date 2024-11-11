@@ -6,6 +6,8 @@ import { db, storage } from '../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './AdminPanel.css';
 import Button from './Button';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import Quill styles for the editor
 
 const AdminPanel = () => {
   const [shows, setShows] = useState([]);
@@ -52,6 +54,11 @@ const AdminPanel = () => {
     } else {
       setFormData({ ...formData, [name]: value });
     }
+  };
+
+  // Handle rich text changes from React Quill editor
+  const handleQuillChange = (value, name) => {
+    setFormData({ ...formData, [name]: value });
   };
 
   // Helper functions for adding, removing, and updating members
@@ -198,7 +205,20 @@ const AdminPanel = () => {
         <h3>{editingShowId ? 'Edit Show' : 'Add New Show'}</h3>
 
         <input type="text" name="title" value={formData.title} onChange={handleChange} required placeholder="Title" />
-        <textarea name="description" value={formData.description} onChange={handleChange} required placeholder="Description"></textarea>
+
+        {/* Description Rich Text Editor */}
+        <ReactQuill 
+          value={formData.description} 
+          onChange={(value) => handleQuillChange(value, 'description')} 
+          placeholder="Description" 
+        />
+
+        {/* Director's Note Rich Text Editor */}
+        <ReactQuill 
+          value={formData.directorNote} 
+          onChange={(value) => handleQuillChange(value, 'directorNote')} 
+          placeholder="Director's Note" 
+        />
 
         {['cast', 'crew', 'creative'].map((section) => (
           <section key={section}>
