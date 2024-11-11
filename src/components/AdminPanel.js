@@ -38,13 +38,13 @@ const AdminPanel = () => {
       console.error("Error fetching shows:", error);
       setError('Failed to load shows.');
     }
-  }, [showsCollectionRef]); // Add showsCollectionRef as a dependency
+  }, [showsCollectionRef]);
 
   useEffect(() => {
     fetchShows();
   }, [fetchShows]);
 
-  // Handle form input changes
+  // Handle general form input changes
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'poster') {
@@ -61,7 +61,21 @@ const AdminPanel = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Helper functions for adding, removing, and updating members
+  // Handle changes for member fields within cast, crew, and creative
+  const handleMemberQuillChange = (value, section, index, field) => {
+    const updatedSection = [...formData[section]];
+    updatedSection[index][field] = value;
+    setFormData({ ...formData, [section]: updatedSection });
+  };
+
+  // Function to handle file input changes for photo fields within cast, crew, and creative
+  const handleMemberChange = (section, index, field, file) => {
+    const updatedSection = [...formData[section]];
+    updatedSection[index][field] = file;
+    setFormData({ ...formData, [section]: updatedSection });
+  };
+
+  // Helper functions for adding and removing members
   const addMember = (section) => {
     setFormData({
       ...formData,
@@ -74,12 +88,6 @@ const AdminPanel = () => {
       ...formData,
       [section]: formData[section].filter((_, i) => i !== index),
     });
-  };
-
-  const handleMemberChange = (section, index, field, value) => {
-    const updatedSection = [...formData[section]];
-    updatedSection[index][field] = value;
-    setFormData({ ...formData, [section]: updatedSection });
   };
 
   // Function to handle editing a show
@@ -206,14 +214,12 @@ const AdminPanel = () => {
 
         <input type="text" name="title" value={formData.title} onChange={handleChange} required placeholder="Title" />
 
-        {/* Description Rich Text Editor */}
         <ReactQuill 
           value={formData.description} 
           onChange={(value) => handleQuillChange(value, 'description')} 
           placeholder="Description" 
         />
 
-        {/* Director's Note Rich Text Editor */}
         <ReactQuill 
           value={formData.directorNote} 
           onChange={(value) => handleQuillChange(value, 'directorNote')} 
@@ -225,9 +231,21 @@ const AdminPanel = () => {
             <h3>{section.charAt(0).toUpperCase() + section.slice(1)} Members</h3>
             {formData[section].map((member, index) => (
               <div key={index}>
-                <input type="text" value={member.name} onChange={(e) => handleMemberChange(section, index, 'name', e.target.value)} placeholder="Name" />
-                <input type="text" value={member.role} onChange={(e) => handleMemberChange(section, index, 'role', e.target.value)} placeholder="Role" />
-                <textarea value={member.bio} onChange={(e) => handleMemberChange(section, index, 'bio', e.target.value)} placeholder="Bio"></textarea>
+                <ReactQuill 
+                  value={member.name} 
+                  onChange={(value) => handleMemberQuillChange(value, section, index, 'name')} 
+                  placeholder="Name" 
+                />
+                <ReactQuill 
+                  value={member.role} 
+                  onChange={(value) => handleMemberQuillChange(value, section, index, 'role')} 
+                  placeholder="Role" 
+                />
+                <ReactQuill 
+                  value={member.bio} 
+                  onChange={(value) => handleMemberQuillChange(value, section, index, 'bio')} 
+                  placeholder="Bio" 
+                />
                 <input type="file" onChange={(e) => handleMemberChange(section, index, 'photo', e.target.files[0])} />
                 <button type="button" onClick={() => removeMember(section, index)}>Remove</button>
               </div>
