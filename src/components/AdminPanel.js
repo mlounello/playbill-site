@@ -1,6 +1,6 @@
 // src/components/AdminPanel.js
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 import { db, storage } from '../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -26,8 +26,8 @@ const AdminPanel = () => {
 
   const showsCollectionRef = collection(db, 'shows');
 
-  // Fetch shows from Firestore
-  const fetchShows = async () => {
+  // Fetch shows from Firestore using useCallback
+  const fetchShows = useCallback(async () => {
     try {
       const data = await getDocs(showsCollectionRef);
       setShows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -36,11 +36,11 @@ const AdminPanel = () => {
       console.error("Error fetching shows:", error);
       setError('Failed to load shows.');
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchShows();
-  }, []);
+  }, [fetchShows]);
 
   // Handle form input changes
   const handleChange = (e) => {
