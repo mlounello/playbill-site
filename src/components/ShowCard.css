@@ -7,8 +7,9 @@
   transition: transform 0.2s, box-shadow 0.2s;
   border-radius: 8px;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: var(--siena-light);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Gudea', sans-serif;
 }
 
 .show-card:hover {
@@ -24,6 +25,6 @@
 .show-title {
   text-align: center;
   padding: 10px 0;
-  color: #006b54; /* Siena's primary color */
-  font-family: 'Oswald', sans-serif; /* Ensure font is imported */
+  color: var(--siena-green);
+  font-family: 'Oswald', sans-serif;
 }
