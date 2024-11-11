@@ -54,18 +54,6 @@
     /* Removed any underline-related styles */
   }
   
-  /* Remove the Accent Bar Below Header if Present */
-  .landing-header::after {
-    /* Commented out to remove the gold accent bar */
-    /* content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background-color: var(--siena-gold);
-    margin: 20px auto 0;
-    border-radius: 2px; */
-  }
-  
   /* Shows Grid Styling */
   .shows-grid {
     display: flex;
