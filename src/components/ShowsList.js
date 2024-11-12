@@ -3,7 +3,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
-import './ShowsList.css'; // Create this CSS file for styling
+import { Link } from 'react-router-dom';
+import './ShowsList.css';
 
 const ShowsList = () => {
   const [shows, setShows] = useState([]);
@@ -35,15 +36,17 @@ const ShowsList = () => {
       ) : (
         <div className="shows-grid">
           {shows.map((show) => (
-            <div key={show.id} className="show-card">
-              {show.poster && <img src={show.poster} alt={`${show.title} Poster`} className="show-poster" />}
-              <h3>{show.title}</h3>
-              <div
-                className="show-description"
-                dangerouslySetInnerHTML={{ __html: show.description }}
-              ></div>
-              {/* Add more show details as needed */}
-            </div>
+            <Link to={`/shows/${show.id}`} key={show.id} className="show-card">
+              {show.poster && (
+                <img src={show.poster} alt={`${show.title} Poster`} className="show-poster" />
+              )}
+              <div className="show-info">
+                <h3 className="show-title">{show.title}</h3>
+                <div className="show-description">
+                  <p dangerouslySetInnerHTML={{ __html: show.description }}></p>
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
       )}

@@ -2,14 +2,14 @@
 
 import React from 'react';
 import ShowsList from './ShowsList';
-import './LandingPage.css'; // Create this CSS file for additional styling if needed
+import './LandingPage.css';
 
 const LandingPage = () => {
   return (
     <div className="landing-page">
       <header className="landing-header">
-        <h1>Welcome to Our Shows</h1>
-        {/* Remove or update any "Home" buttons here if present */}
+        <h1>Welcome to Our Show Collection</h1>
+        <p>Explore our latest productions and their details below.</p>
       </header>
       <ShowsList />
     </div>

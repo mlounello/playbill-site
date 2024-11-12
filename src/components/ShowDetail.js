@@ -1,124 +1,137 @@
 // src/components/ShowDetail.js
 
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import shows from '../data/shows';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 import './ShowDetail.css';
-import Lightbox from 'yet-another-react-lightbox';
-import 'yet-another-react-lightbox/styles.css';
 
 const ShowDetail = () => {
-  const { id } = useParams(); // Extract the show ID from the URL
-  const show = shows.find((s) => s.id === parseInt(id));
+  const { id } = useParams();
+  const [show, setShow] = useState(null);
+  const [error, setError] = useState('');
 
-  // State for Lightbox
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [currentImage, setCurrentImage] = React.useState(0);
+  const fetchShow = async () => {
+    try {
+      const showDoc = doc(db, 'shows', id);
+      const showSnap = await getDoc(showDoc);
+      if (showSnap.exists()) {
+        setShow(showSnap.data());
+      } else {
+        setError('Show not found.');
+      }
+    } catch (error) {
+      console.error('Error fetching show:', error);
+      setError('Failed to load show details.');
+    }
+  };
+
+  useEffect(() => {
+    fetchShow();
+  }, [id]);
+
+  if (error) {
+    return <div className="show-detail-error">{error}</div>;
+  }
 
   if (!show) {
-    return (
-      <div className="show-detail">
-        <h2>Show Not Found</h2>
-        <Link to="/" className="back-link">
-          Back to Landing Page
-        </Link>
-      </div>
-    );
+    return <div className="show-detail-loading">Loading...</div>;
   }
 
   return (
     <div className="show-detail">
-      <Link to="/" className="back-link">
-        &larr; Back to Landing Page
-      </Link>
-      <h2 className="show-detail-title">{show.title}</h2>
-      <img
-        src={show.poster}
-        alt={`${show.title} Poster`}
-        className="show-detail-poster"
-      />
-      <p className="show-detail-description">{show.description}</p>
-
-      {/* Director's Note */}
-      <section className="show-section">
-        <h3>Director's Note</h3>
-        <p>{show.directorNote}</p>
-      </section>
-
-      {/* Cast Section */}
-      <section className="show-section">
-        <h3>Cast</h3>
-        <div className="profiles-grid">
-          {show.cast.map((member, index) => (
-            <div key={index} className="profile-card">
-              <img
-                src={member.photo}
-                alt={`${member.actor} as ${member.role}`}
-                className="profile-photo"
-              />
-              <h4>{member.actor}</h4>
-              <p className="role">{member.role}</p>
-              <p className="bio">{member.bio}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Crew Section */}
-      <section className="show-section">
-        <h3>Crew</h3>
-        <div className="profiles-grid">
-          {show.crew.map((member, index) => (
-            <div key={index} className="profile-card">
-              <img
-                src={member.photo}
-                alt={`${member.name} - ${member.role}`}
-                className="profile-photo"
-              />
-              <h4>{member.name}</h4>
-              <p className="role">{member.role}</p>
-              <p className="bio">{member.bio}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Post-Show Media Gallery */}
-      <section className="show-section">
-        <h3>Media Gallery</h3>
-        <div className="media-gallery">
-          {show.mediaGallery.map((media, index) => (
-            <img
-              key={index}
-              src={media}
-              alt={`${show.title} Media ${index + 1}`}
-              className="media-photo"
-              onClick={() => {
-                setCurrentImage(index);
-                setIsOpen(true);
-              }}
-            />
-          ))}
-        </div>
-        {isOpen && (
-          <Lightbox
-            open={isOpen}
-            close={() => setIsOpen(false)}
-            slides={show.mediaGallery.map((image) => ({ src: image }))}
-            index={currentImage}
-            onClose={() => setIsOpen(false)}
-            onMovePrev={() =>
-              setCurrentImage(
-                (currentImage + show.mediaGallery.length - 1) %
-                  show.mediaGallery.length
-              )
-            }
-            onMoveNext={() =>
-              setCurrentImage((currentImage + 1) % show.mediaGallery.length)
-            }
-          />
+      <header className="show-detail-header">
+        {show.poster && (
+          <img src={show.poster} alt={`${show.title} Poster`} className="show-detail-poster" />
         )}
+        <h1 className="show-detail-title">{show.title}</h1>
+      </header>
+      <section className="show-detail-section">
+        <h2>Description</h2>
+        <div
+          className="show-detail-description"
+          dangerouslySetInnerHTML={{ __html: show.description }}
+        ></div>
       </section>
+      {show.directorNote && (
+        <section className="show-detail-section">
+          <h2>Director's Note</h2>
+          <div
+            className="show-detail-director-note"
+            dangerouslySetInnerHTML={{ __html: show.directorNote }}
+          ></div>
+        </section>
+      )}
+      {show.cast && show.cast.length > 0 && (
+        <section className="show-detail-section">
+          <h2>Cast</h2>
+          <div className="members-grid">
+            {show.cast.map((member, index) => (
+              <div key={index} className="member-card">
+                {member.photo && (
+                  <img src={member.photo} alt={`${member.name} Photo`} className="member-photo" />
+                )}
+                <h3 className="member-name">{member.name}</h3>
+                <p className="member-role">{member.role}</p>
+                <div
+                  className="member-bio"
+                  dangerouslySetInnerHTML={{ __html: member.bio }}
+                ></div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+      {show.crew && show.crew.length > 0 && (
+        <section className="show-detail-section">
+          <h2>Crew</h2>
+          <div className="members-grid">
+            {show.crew.map((member, index) => (
+              <div key={index} className="member-card">
+                {member.photo && (
+                  <img src={member.photo} alt={`${member.name} Photo`} className="member-photo" />
+                )}
+                <h3 className="member-name">{member.name}</h3>
+                <p className="member-role">{member.role}</p>
+                <div
+                  className="member-bio"
+                  dangerouslySetInnerHTML={{ __html: member.bio }}
+                ></div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+      {show.creative && show.creative.length > 0 && (
+        <section className="show-detail-section">
+          <h2>Creative Team</h2>
+          <div className="members-grid">
+            {show.creative.map((member, index) => (
+              <div key={index} className="member-card">
+                {member.photo && (
+                  <img src={member.photo} alt={`${member.name} Photo`} className="member-photo" />
+                )}
+                <h3 className="member-name">{member.name}</h3>
+                <p className="member-role">{member.role}</p>
+                <div
+                  className="member-bio"
+                  dangerouslySetInnerHTML={{ __html: member.bio }}
+                ></div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+      {show.mediaGallery && show.mediaGallery.length > 0 && (
+        <section className="show-detail-section">
+          <h2>Media Gallery</h2>
+          <div className="media-gallery">
+            {show.mediaGallery.map((mediaUrl, index) => (
+              <img key={index} src={mediaUrl} alt={`Media ${index + 1}`} className="media-item" />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 };
