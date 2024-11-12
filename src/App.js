@@ -9,6 +9,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
+// Lazy load components
 const LandingPage = lazy(() => import('./components/LandingPage'));
 const ShowDetail = lazy(() => import('./components/ShowDetail'));
 const AdminPanel = lazy(() => import('./components/AdminPanel'));

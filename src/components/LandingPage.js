@@ -1,22 +1,17 @@
 // src/components/LandingPage.js
 
 import React from 'react';
-import shows from '../data/shows';
-import ShowCard from './ShowCard';
-import './LandingPage.css';
+import ShowsList from './ShowsList';
+import './LandingPage.css'; // Create this CSS file for additional styling if needed
 
 const LandingPage = () => {
   return (
     <div className="landing-page">
       <header className="landing-header">
-        <h1>Siena College Productions</h1>
-        <p>Welcome to our Digital Playbill</p>
+        <h1>Welcome to Our Shows</h1>
+        {/* Remove or update any "Home" buttons here if present */}
       </header>
-      <div className="shows-grid">
-        {shows.map((show) => (
-          <ShowCard key={show.id} show={show} />
-        ))}
-      </div>
+      <ShowsList />
     </div>
   );
 };
