@@ -1,6 +1,6 @@
 // src/components/ShowDetail.js
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -11,7 +11,7 @@ const ShowDetail = () => {
   const [show, setShow] = useState(null);
   const [error, setError] = useState('');
 
-  const fetchShow = async () => {
+  const fetchShow = useCallback(async () => {
     try {
       const showDoc = doc(db, 'shows', id);
       const showSnap = await getDoc(showDoc);
@@ -24,11 +24,11 @@ const ShowDetail = () => {
       console.error('Error fetching show:', error);
       setError('Failed to load show details.');
     }
-  };
+  }, [db, id]);
 
   useEffect(() => {
     fetchShow();
-  }, [id]);
+  }, [fetchShow]);
 
   if (error) {
     return <div className="show-detail-error">{error}</div>;
@@ -42,7 +42,7 @@ const ShowDetail = () => {
     <div className="show-detail">
       <header className="show-detail-header">
         {show.poster && (
-          <img src={show.poster} alt={`${show.title} Poster`} className="show-detail-poster" />
+          <img src={show.poster} alt={`${show.title}`} className="show-detail-poster" />
         )}
         <h1 className="show-detail-title">{show.title}</h1>
       </header>
@@ -69,7 +69,7 @@ const ShowDetail = () => {
             {show.cast.map((member, index) => (
               <div key={index} className="member-card">
                 {member.photo && (
-                  <img src={member.photo} alt={`${member.name} Photo`} className="member-photo" />
+                  <img src={member.photo} alt={`${member.name}`} className="member-photo" />
                 )}
                 <h3 className="member-name">{member.name}</h3>
                 <p className="member-role">{member.role}</p>
@@ -89,7 +89,7 @@ const ShowDetail = () => {
             {show.crew.map((member, index) => (
               <div key={index} className="member-card">
                 {member.photo && (
-                  <img src={member.photo} alt={`${member.name} Photo`} className="member-photo" />
+                  <img src={member.photo} alt={`${member.name}`} className="member-photo" />
                 )}
                 <h3 className="member-name">{member.name}</h3>
                 <p className="member-role">{member.role}</p>
@@ -109,7 +109,7 @@ const ShowDetail = () => {
             {show.creative.map((member, index) => (
               <div key={index} className="member-card">
                 {member.photo && (
-                  <img src={member.photo} alt={`${member.name} Photo`} className="member-photo" />
+                  <img src={member.photo} alt={`${member.name}`} className="member-photo" />
                 )}
                 <h3 className="member-name">{member.name}</h3>
                 <p className="member-role">{member.role}</p>

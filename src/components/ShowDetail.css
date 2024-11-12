@@ -98,3 +98,11 @@
   height: auto;
   border-radius: 4px;
 }
+
+.show-detail-error,
+.show-detail-loading {
+  text-align: center;
+  font-size: 1.5em;
+  color: #ff0000;
+  margin-top: 50px;
+}
